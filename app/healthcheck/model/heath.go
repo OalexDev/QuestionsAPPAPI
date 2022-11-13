@@ -6,7 +6,9 @@ type Health struct {
 }
 
 type Route struct {
-	Method  string
-	Path    string
-	Message string `json:"message,omitempty"`
+	Method      string
+	Version     string `env:"version"`
+	Environment string `env:"env"`
+	Path        string
+	Message     string `json:"message,omitempty" `
 }

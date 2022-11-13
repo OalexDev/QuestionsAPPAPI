@@ -25,7 +25,7 @@ type Environment struct {
 		App_name    string `env:"APPNAME"`
 	} `json:"App"`
 
-	Env string `json:"environment"`
+	Env string `env:"ENV"`
 	DB  DB
 }
 

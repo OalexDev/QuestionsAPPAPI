@@ -6,6 +6,9 @@ import (
 	"fmt"
 
 	"github.com/Five-Series/questions/factory/healthcheck"
+	"github.com/Five-Series/questions/infra/database"
+	"github.com/Five-Series/questions/infra/environment"
+
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 	ginadapter "github.com/awslabs/aws-lambda-go-api-proxy/gin"
@@ -14,12 +17,18 @@ import (
 )
 
 var (
+	env          *environment.Environment
 	ginLambda    *ginadapter.GinLambda
 	app          *gin.Engine
 	dbConnection *sql.DB
 )
 
 func init() {
+
+	// DB
+	env = environment.LoadOrDie()
+	db := database.New(&env.DB)
+	dbConnection = db.Connect()
 
 	app = gin.Default()
 	ginLambda = ginadapter.New(app)
@@ -57,6 +66,7 @@ func build() {
 
 	// Health check
 	healthStarter := healthcheck.Healthcheck{
+		Env:          env,
 		DbConnection: dbConnection,
 		RouterGroup:  &app.RouterGroup,
 		RoutesGin:    app.Routes(),

@@ -2,17 +2,18 @@ package healthcheck
 
 import (
 	"github.com/Five-Series/questions/app/healthcheck/model"
+	"github.com/Five-Series/questions/infra/environment"
 	outHealthCheck "github.com/Five-Series/questions/output/healthcheck"
 )
 
 type Service struct {
-	// HealthReader model.Health
+	Env        *environment.Environment
 	Repository *outHealthCheck.Repository
 }
 
-func NewService(repo *outHealthCheck.Repository) *Service {
+func NewService(repo *outHealthCheck.Repository, env *environment.Environment) *Service {
 	return &Service{
-		// HealthReader: reader,
+		Env:        env,
 		Repository: repo,
 	}
 }
