@@ -1,0 +1,49 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Questions SAM for deploy Musa lambda function with SQS as triger # trocar a descrição
+
+Parameters:
+  APPNAME:
+    Description: Name of application
+    Type: String
+    Default: Questions
+
+  APPVERSION:
+    Description: Version of application
+    Type: String
+    Default: V.x.x
+ 
+  ENV: # Ambiente, DEV - HML - PRD
+    Description: Secrets of the project
+    Type: String
+    Default: DEV
+
+Globals:
+  Function:
+    Timeout: 30
+
+Resources:
+  Questions:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      Handler: Questions
+      Runtime: go1.x
+      MemorySize: 1024
+      Timeout: 120
+      Environment:
+        Variables:
+          APPNAME: !Ref APPNAME
+          APPVERSION: !Ref APPVERSION
+          ENV: !Ref ENV
+      Events:
+        GetResource:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: any
+Outputs:
+  Questions:
+    Description: "API Gateway endpoint URL for Dev environment for First Function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/dev/"
+    Export:
+      Name: QuestionAPI
