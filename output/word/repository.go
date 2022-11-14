@@ -18,26 +18,36 @@ func NewRepository(env *environment.Environment, conn *sql.DB) *Repository {
 		DbConnection: conn}
 }
 
-func (r *Repository) ReadeOneWord() ([]model.Word, error) {
+func (r *Repository) ReadeOneWord() (model.Word, error) {
+
+	w := model.Word{}
 
 	query := `select id, word from words ORDER BY random() 	LIMIT 1;`
 	rows, err := r.DbConnection.Query(query)
 	if err != nil {
-		return nil, err
+		return w, err
 	}
 	defer rows.Close()
 
-	ws := []model.Word{}
-
 	for rows.Next() {
-		w := model.Word{}
 		err = rows.Scan(&w.ID, &w.Word)
 		if err != nil {
-			return nil, err
+			return w, err
 		}
-		ws = append(ws, w)
 	}
 
-	return ws, nil
+	return w, nil
+
+}
+
+func (r *Repository) InsertWordToRoom(roomid, wordId int64) (int, error) {
+
+	query := `INSERT INTO public.roomwords (roomid,wordid)	VALUES ($1,$2) RETURNING id;	`
+	id := 0
+	err := r.DbConnection.QueryRow(query, roomid, wordId).Scan(&id)
+	if err != nil {
+		return 0, err
+	}
+	return id, nil
 
 }

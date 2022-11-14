@@ -1,6 +1,8 @@
 package room
 
 import (
+	"fmt"
+
 	"github.com/Five-Series/questions/app/room/model"
 	"github.com/Five-Series/questions/infra/environment"
 	outRoom "github.com/Five-Series/questions/output/room"
@@ -29,4 +31,30 @@ func (s Service) GetRooms() ([]model.Rooms, error) {
 	}
 
 	return rooms, nil
+}
+
+func (s Service) EntryRoom(room *model.Rooms) (string, error) {
+
+	id, err := s.Repository.EntryRoom(room)
+	if err != nil {
+		return "", err
+	}
+	if id < 1 {
+		return "", fmt.Errorf("no insert success: %d", err)
+	}
+
+	return "Success", nil
+}
+
+func (s Service) MakeRoom() (int64, error) {
+
+	id, err := s.Repository.MakeRoom()
+	if err != nil {
+		return 0, err
+	}
+	if id < 1 {
+		return 0, fmt.Errorf("no insert success: %d", err)
+	}
+
+	return id, nil
 }

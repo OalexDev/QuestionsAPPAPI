@@ -2,9 +2,11 @@ package room
 
 import (
 	"database/sql"
+	"time"
 
 	"github.com/Five-Series/questions/app/room/model"
 	"github.com/Five-Series/questions/infra/environment"
+	_ "github.com/lib/pq"
 )
 
 type Repository struct {
@@ -39,5 +41,32 @@ func (r *Repository) GetRooms() ([]model.Rooms, error) {
 	}
 
 	return ros, nil
+
+}
+
+func (r *Repository) EntryRoom(room *model.Rooms) (int, error) {
+
+	query := `INSERT INTO public.roomuser (roomid,userid) VALUES ($1,$2) RETURNING id;`
+	id := 0
+	err := r.DbConnection.QueryRow(query, room.ID, room.UserID).Scan(&id)
+	if err != nil {
+		return 0, err
+	}
+
+	return id, nil
+
+}
+
+func (r *Repository) MakeRoom() (int64, error) {
+	now := time.Now()
+	idRoom := now.Unix()
+	query := `INSERT INTO public.room (room)VALUES ($1) RETURNING id;`
+	id := 0
+	err := r.DbConnection.QueryRow(query, idRoom).Scan(&id)
+	if err != nil {
+		return 0, err
+	}
+
+	return idRoom, nil
 
 }

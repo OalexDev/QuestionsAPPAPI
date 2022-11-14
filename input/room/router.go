@@ -24,5 +24,7 @@ func NewRouter(controller *Controller) (*Router, error) {
 func (r *Router) SetRoutes(router *gin.RouterGroup) {
 
 	router.GET("/rooms", r.controller.GetRooms)
+	router.POST("/MakeRoom", r.controller.MakeRoom)
+	router.POST("/rooms/:id", r.controller.EntryRoom)
 
 }

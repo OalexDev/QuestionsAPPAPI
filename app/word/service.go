@@ -21,11 +21,16 @@ func NewService(env *environment.Environment, sess *session.Session, repo *outwo
 	}
 }
 
-func (s Service) GetWord() ([]model.Word, error) {
+func (s Service) GetWord(room int64) (model.Word, error) {
 
 	word, err := s.Repository.ReadeOneWord()
 	if err != nil {
-		return nil, err
+		return word, err
+	}
+
+	_, err = s.Repository.InsertWordToRoom(room, word.ID)
+	if err != nil {
+		return word, err
 	}
 
 	return word, nil

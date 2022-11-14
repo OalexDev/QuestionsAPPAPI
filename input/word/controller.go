@@ -1,7 +1,9 @@
 package word
 
 import (
+	"fmt"
 	"net/http"
+	"strconv"
 
 	service "github.com/Five-Series/questions/app/word"
 	"github.com/Five-Series/questions/exception"
@@ -29,7 +31,21 @@ func NewControllerWord(svc *service.Service) *Controller {
 
 func (c *Controller) GetWord(context *gin.Context) {
 
-	result, err := c.Service.GetWord()
+	roomID := context.GetHeader("X-ROOM-ID")
+	if len(roomID) == 0 {
+		err := exception.NewInvalidParametersError([]string{"X-ROOM-ID"})
+		_ = httphandler.WriteMissingParametersError(context, []string{err.Error()})
+		return
+	}
+
+	roomInt, err := strconv.ParseInt(roomID, 10, 64)
+	if err != nil {
+		err = fmt.Errorf("error parsing room ID: %v", err)
+		httphandler.WriteSuccess(context, http.StatusConflict, entity, err)
+		return
+	}
+
+	result, err := c.Service.GetWord(roomInt)
 	if err != nil {
 		switch err.(type) {
 
