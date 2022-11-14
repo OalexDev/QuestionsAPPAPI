@@ -23,7 +23,7 @@ func NewService(env *environment.Environment, sess *session.Session, repo *outwo
 
 func (s Service) GetWord(room int64) (model.Word, error) {
 
-	word, err := s.Repository.ReadeOneWord()
+	word, err := s.Repository.ReadeOneWord(room)
 	if err != nil {
 		return word, err
 	}

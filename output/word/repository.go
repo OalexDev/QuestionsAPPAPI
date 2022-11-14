@@ -18,12 +18,20 @@ func NewRepository(env *environment.Environment, conn *sql.DB) *Repository {
 		DbConnection: conn}
 }
 
-func (r *Repository) ReadeOneWord() (model.Word, error) {
+func (r *Repository) ReadeOneWord(room int64) (model.Word, error) {
 
 	w := model.Word{}
 
-	query := `select id, word from words ORDER BY random() 	LIMIT 1;`
-	rows, err := r.DbConnection.Query(query)
+	query := `SELECT 
+			w.id, 
+			w.word  
+		FROM words w
+		WHERE w.id not in (
+			SELECT DISTINCT wordid  
+			FROM roomwords 
+			WHERE roomid = $1)
+		ORDER BY random() LIMIT 1;`
+	rows, err := r.DbConnection.Query(query, room)
 	if err != nil {
 		return w, err
 	}
