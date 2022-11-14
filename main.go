@@ -3,14 +3,15 @@ package main
 import (
 	"context"
 	"database/sql"
-	"fmt"
 
 	"github.com/Five-Series/questions/factory/healthcheck"
+	"github.com/Five-Series/questions/factory/word"
 	"github.com/Five-Series/questions/infra/database"
 	"github.com/Five-Series/questions/infra/environment"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/aws/aws-sdk-go/aws/session"
 	ginadapter "github.com/awslabs/aws-lambda-go-api-proxy/gin"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -21,30 +22,33 @@ var (
 	ginLambda    *ginadapter.GinLambda
 	app          *gin.Engine
 	dbConnection *sql.DB
+	routerGroup  *gin.RouterGroup
+	sess         *session.Session
 )
 
 func init() {
 
 	// DB
 	env = environment.LoadOrDie()
-	db := database.New(&env.DB)
+	db := database.New(env)
 	dbConnection = db.Connect()
 
 	app = gin.Default()
 	ginLambda = ginadapter.New(app)
 	app.Use(corsConfig())
-	// v1 := app.Group("/v1")
+	routerGroup = app.Group("/v1")
 
 	build()
-	// //aws
-	// sess := session.Must(session.NewSessionWithOptions(session.Options{
-	// 	SharedConfigState: session.SharedConfigEnable,
-	// }))
+
+	//aws
+	sess = session.Must(session.NewSessionWithOptions(session.Options{
+		SharedConfigState: session.SharedConfigEnable,
+	}))
 
 }
 
 func main() {
-	fmt.Printf("----- ola -----\n%v\n---------------\n", "ola")
+
 	lambda.Start(Handler)
 }
 
@@ -63,6 +67,15 @@ func corsConfig() gin.HandlerFunc {
 }
 
 func build() {
+
+	// Get Word
+	word := word.Word{
+		DbConnection: dbConnection,
+		Env:          env,
+		RouterGroup:  routerGroup,
+		AWSSess:      sess,
+	}
+	word.Start()
 
 	// Health check
 	healthStarter := healthcheck.Healthcheck{

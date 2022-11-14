@@ -12,21 +12,16 @@ import (
 
 // var secretCache, _ = secretcache.New()
 
-type DB struct {
-	DbUser string `json:"username"`
-	DBPass string `json:"password"`
-	DBhost string `json:"host"`
-	DBPort int64  `json:"port"`
-}
-
 type Environment struct {
 	App struct {
 		App_version string `env:"APPVERSION"`
 		App_name    string `env:"APPNAME"`
 	} `json:"App"`
-
-	Env string `env:"ENV"`
-	DB  DB
+	Env    string `env:"ENV"`
+	DbUser string `json:"username" env:"USERNAME"`
+	DBPass string `json:"password" env:"PASSWORD"`
+	DBhost string `json:"host" env:"HOST"`
+	DBPort int64  `json:"port" env:"PORT"`
 }
 
 // LoadOrDie responsible for loading the environment variables in the cloud

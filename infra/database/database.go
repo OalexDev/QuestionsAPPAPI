@@ -12,17 +12,18 @@ import (
 const ZeroDBUnix = int64(-62135596800)
 
 type DataBase struct {
-	Env *environment.DB
+	Env *environment.Environment
 }
 
 // New Constructor for DataBase struct
-func New(env *environment.DB) *DataBase {
+func New(env *environment.Environment) *DataBase {
 	return &DataBase{Env: env}
 
 }
 
 func (d *DataBase) buildConnString() string {
-	connStr := fmt.Sprintf("host=%s port=%d user=%s password=%s sslmode=disable", d.Env.DBhost, d.Env.DBPort, d.Env.DbUser, d.Env.DBPass)
+
+	connStr := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", d.Env.DBhost, d.Env.DBPort, d.Env.DbUser, d.Env.DBPass, "postgres")
 	return connStr
 
 }
@@ -39,6 +40,11 @@ func (d *DataBase) Connect() *sql.DB {
 	db.SetMaxOpenConns(5)
 	db.SetMaxIdleConns(5)
 	db.SetConnMaxLifetime(5 * time.Minute)
+
+	err = db.Ping()
+	if err != nil {
+		fmt.Printf("----- deu erro no ping do err -----\n%v\n---------------\n", err)
+	}
 
 	return db
 }

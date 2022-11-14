@@ -18,6 +18,27 @@ Parameters:
     Type: String
     Default: DEV
 
+  DBACCESS:
+    Description: Secrets of the project
+    Type: String
+
+  USERNAME:
+    Description: Secrets of the project
+    Type: String
+
+  PASSWORD:
+    Description: Secrets of the project
+    Type: String
+
+  HOST:
+    Description: Secrets of the project
+    Type: String
+
+  PORT:
+    Description: Secrets of the project
+    Type: String
+
+
 Globals:
   Function:
     Timeout: 30
@@ -35,6 +56,11 @@ Resources:
           APPNAME: !Ref APPNAME
           APPVERSION: !Ref APPVERSION
           ENV: !Ref ENV
+          DBACCESS: !Ref DBACCESS
+          USERNAME: !Ref USERNAME
+          PASSWORD: !Ref PASSWORD
+          HOST: !Ref HOST
+          PORT: !Ref PORT
       Events:
         GetResource:
           Type: Api
