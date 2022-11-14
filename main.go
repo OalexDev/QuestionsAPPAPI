@@ -5,6 +5,7 @@ import (
 	"database/sql"
 
 	"github.com/Five-Series/questions/factory/healthcheck"
+	"github.com/Five-Series/questions/factory/room"
 	"github.com/Five-Series/questions/factory/word"
 	"github.com/Five-Series/questions/infra/database"
 	"github.com/Five-Series/questions/infra/environment"
@@ -68,7 +69,17 @@ func corsConfig() gin.HandlerFunc {
 
 func build() {
 
-	// Get Word
+	// Rooms
+	room := room.Room{
+		DbConnection: dbConnection,
+		Env:          env,
+		RouterGroup:  routerGroup,
+		AWSSess:      sess,
+	}
+
+	room.Start()
+
+	// Word
 	word := word.Word{
 		DbConnection: dbConnection,
 		Env:          env,

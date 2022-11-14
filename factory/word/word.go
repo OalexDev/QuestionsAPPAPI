@@ -22,8 +22,6 @@ type Word struct {
 
 func (e *Word) Start() error {
 
-	// repo := outHealthCheck.NewRepository(e.DbConnection, e.RoutesGin, e.Env)
-
 	repo := outword.NewRepository(
 		e.Env,
 		e.DbConnection,
