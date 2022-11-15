@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 
+	"github.com/Five-Series/questions/factory/game"
 	"github.com/Five-Series/questions/factory/healthcheck"
 	"github.com/Five-Series/questions/factory/room"
 	"github.com/Five-Series/questions/factory/word"
@@ -50,6 +51,12 @@ func init() {
 
 func main() {
 
+	// Como Matar as salas?
+	// Logins por Nome
+	// Refactory do codig
+	// Refactory dos erros
+	// Logs
+
 	lambda.Start(Handler)
 }
 
@@ -61,13 +68,22 @@ func corsConfig() gin.HandlerFunc {
 
 	configCors := cors.DefaultConfig()
 	configCors.AllowAllOrigins = true
-	configCors.AllowHeaders = []string{"Origin", "Content-Length", "Content-Type", "X-TRACE-ID", "X-CLIENT-ID", "X-USER-TYPE", "X-USER-WMSID", "X-USER-ROLE", "X-USER-NAME", "Authorization"}
+	configCors.AllowHeaders = []string{"Origin", "Content-Length", "Content-Type", "X-ROOM-ID", "X-PLAYER-ID", "Authorization"}
 
 	handler := cors.New(configCors)
 	return handler
 }
 
 func build() {
+
+	// Game
+	game := game.Game{
+		DbConnection: dbConnection,
+		Env:          env,
+		RouterGroup:  routerGroup,
+		AWSSess:      sess,
+	}
+	game.Start()
 
 	// Rooms
 	room := room.Room{
@@ -76,7 +92,6 @@ func build() {
 		RouterGroup:  routerGroup,
 		AWSSess:      sess,
 	}
-
 	room.Start()
 
 	// Word

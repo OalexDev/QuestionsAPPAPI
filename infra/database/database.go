@@ -42,9 +42,6 @@ func (d *DataBase) Connect() *sql.DB {
 	db.SetConnMaxLifetime(5 * time.Minute)
 
 	err = db.Ping()
-	if err != nil {
-		fmt.Printf("----- deu erro no ping do err -----\n%v\n---------------\n", err)
-	}
 
 	return db
 }

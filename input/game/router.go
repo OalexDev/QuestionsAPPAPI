@@ -1,4 +1,4 @@
-package word
+package game
 
 import (
 	"github.com/Five-Series/questions/exception"
@@ -23,7 +23,8 @@ func NewRouter(controller *Controller) (*Router, error) {
 // SetRoutes resposible for create router on endpoint group
 func (r *Router) SetRoutes(router *gin.RouterGroup) {
 
-	router.GET("/word/new", r.controller.GetNewWord)
-	router.GET("/word", r.controller.GetWord)
+	router.POST("/game", r.controller.GetRooms)
+	router.GET("/game/messages", r.controller.GetGameMessages)
 
+	// Alexandre Permitir Votar qual o melhor, mas nao pode votar em vc mesmo
 }

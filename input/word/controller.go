@@ -29,6 +29,41 @@ func NewControllerWord(svc *service.Service) *Controller {
 	}
 }
 
+func (c *Controller) GetNewWord(context *gin.Context) {
+
+	roomID := context.GetHeader("X-ROOM-ID")
+	if len(roomID) == 0 {
+		err := exception.NewInvalidParametersError([]string{"X-ROOM-ID"})
+		_ = httphandler.WriteMissingParametersError(context, []string{err.Error()})
+		return
+	}
+
+	roomInt, err := strconv.ParseInt(roomID, 10, 64)
+	if err != nil {
+		err = fmt.Errorf("error parsing room ID: %v", err)
+		httphandler.WriteSuccess(context, http.StatusConflict, entity, err)
+		return
+	}
+
+	result, err := c.Service.GetNewWord(roomInt)
+	if err != nil {
+		switch err.(type) {
+
+		case exception.InvalidParametersError:
+			_ = httphandler.WriteInvalidParametersError(context, []string{err.Error()})
+			return
+		case exception.ConflictError:
+			_ = httphandler.WriteConflictError(context, entity)
+			return
+		default:
+			_ = httphandler.WriteInternalServerError(context, err.Error())
+			return
+		}
+	}
+	httphandler.WriteSuccess(context, http.StatusOK, entity, result)
+
+}
+
 func (c *Controller) GetWord(context *gin.Context) {
 
 	roomID := context.GetHeader("X-ROOM-ID")

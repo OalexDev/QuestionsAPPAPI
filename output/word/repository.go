@@ -18,7 +18,7 @@ func NewRepository(env *environment.Environment, conn *sql.DB) *Repository {
 		DbConnection: conn}
 }
 
-func (r *Repository) ReadeOneWord(room int64) (model.Word, error) {
+func (r *Repository) ReadeOneNewWord(room int64) (model.Word, error) {
 
 	w := model.Word{}
 
@@ -31,6 +31,7 @@ func (r *Repository) ReadeOneWord(room int64) (model.Word, error) {
 			FROM roomwords 
 			WHERE roomid = $1)
 		ORDER BY random() LIMIT 1;`
+
 	rows, err := r.DbConnection.Query(query, room)
 	if err != nil {
 		return w, err
@@ -57,5 +58,32 @@ func (r *Repository) InsertWordToRoom(roomid, wordId int64) (int, error) {
 		return 0, err
 	}
 	return id, nil
+
+}
+
+func (r *Repository) ReadWord(room int64) (model.Word, error) {
+
+	w := model.Word{}
+
+	query := `SELECT id, word FROM  words WHERE id IN (
+		SELECT wordid  FROM roomwords rw
+		WHERE roomid = $1
+		ORDER BY created_at  DESC 
+		LIMIT 1 );`
+
+	rows, err := r.DbConnection.Query(query, room)
+	if err != nil {
+		return w, err
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		err = rows.Scan(&w.ID, &w.Word)
+		if err != nil {
+			return w, err
+		}
+	}
+
+	return w, nil
 
 }
