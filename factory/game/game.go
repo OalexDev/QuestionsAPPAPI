@@ -4,11 +4,11 @@ import (
 	"database/sql"
 	"log"
 
-	svcGame "github.com/Five-Series/questions/app/game"
+	svcGame "github.com/OalexDev/QuestionsAPPAPI/app/game"
 
-	"github.com/Five-Series/questions/infra/environment"
-	inGame "github.com/Five-Series/questions/input/game"
-	outGame "github.com/Five-Series/questions/output/game"
+	"github.com/OalexDev/QuestionsAPPAPI/infra/environment"
+	inGame "github.com/OalexDev/QuestionsAPPAPI/input/game"
+	outGame "github.com/OalexDev/QuestionsAPPAPI/output/game"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/gin-gonic/gin"
 )

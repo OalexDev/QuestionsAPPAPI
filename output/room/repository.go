@@ -4,8 +4,8 @@ import (
 	"database/sql"
 	"time"
 
-	"github.com/Five-Series/questions/app/room/model"
-	"github.com/Five-Series/questions/infra/environment"
+	"github.com/OalexDev/QuestionsAPPAPI/app/room/model"
+	"github.com/OalexDev/QuestionsAPPAPI/infra/environment"
 	_ "github.com/lib/pq"
 )
 

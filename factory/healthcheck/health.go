@@ -4,10 +4,10 @@ import (
 	"database/sql"
 	"log"
 
-	health "github.com/Five-Series/questions/app/healthcheck"
-	"github.com/Five-Series/questions/infra/environment"
-	inHealthCheck "github.com/Five-Series/questions/input/healthcheck"
-	outHealthCheck "github.com/Five-Series/questions/output/healthcheck"
+	health "github.com/OalexDev/QuestionsAPPAPI/app/healthcheck"
+	"github.com/OalexDev/QuestionsAPPAPI/infra/environment"
+	inHealthCheck "github.com/OalexDev/QuestionsAPPAPI/input/healthcheck"
+	outHealthCheck "github.com/OalexDev/QuestionsAPPAPI/output/healthcheck"
 	"github.com/gin-gonic/gin"
 )
 

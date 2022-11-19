@@ -1,9 +1,9 @@
 package word
 
 import (
-	model "github.com/Five-Series/questions/app/word/model"
-	"github.com/Five-Series/questions/infra/environment"
-	outword "github.com/Five-Series/questions/output/word"
+	model "github.com/OalexDev/QuestionsAPPAPI/app/word/model"
+	"github.com/OalexDev/QuestionsAPPAPI/infra/environment"
+	outword "github.com/OalexDev/QuestionsAPPAPI/output/word"
 	"github.com/aws/aws-sdk-go/aws/session"
 )
 

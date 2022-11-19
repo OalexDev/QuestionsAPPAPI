@@ -4,9 +4,9 @@ import (
 	"database/sql"
 	"fmt"
 
-	"github.com/Five-Series/questions/app/game/model"
-	modelWord "github.com/Five-Series/questions/app/word/model"
-	"github.com/Five-Series/questions/infra/environment"
+	"github.com/OalexDev/QuestionsAPPAPI/app/game/model"
+	modelWord "github.com/OalexDev/QuestionsAPPAPI/app/word/model"
+	"github.com/OalexDev/QuestionsAPPAPI/infra/environment"
 )
 
 type Repository struct {

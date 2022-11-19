@@ -3,8 +3,8 @@ package word
 import (
 	"database/sql"
 
-	model "github.com/Five-Series/questions/app/word/model"
-	"github.com/Five-Series/questions/infra/environment"
+	model "github.com/OalexDev/QuestionsAPPAPI/app/word/model"
+	"github.com/OalexDev/QuestionsAPPAPI/infra/environment"
 )
 
 type Repository struct {

@@ -4,10 +4,10 @@ import (
 	"database/sql"
 	"log"
 
-	svcWord "github.com/Five-Series/questions/app/word"
-	"github.com/Five-Series/questions/infra/environment"
-	inWord "github.com/Five-Series/questions/input/word"
-	outword "github.com/Five-Series/questions/output/word"
+	svcWord "github.com/OalexDev/QuestionsAPPAPI/app/word"
+	"github.com/OalexDev/QuestionsAPPAPI/infra/environment"
+	inWord "github.com/OalexDev/QuestionsAPPAPI/input/word"
+	outword "github.com/OalexDev/QuestionsAPPAPI/output/word"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/gin-gonic/gin"
 )

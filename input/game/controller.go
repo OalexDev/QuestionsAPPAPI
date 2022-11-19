@@ -4,11 +4,11 @@ import (
 	"net/http"
 	"strconv"
 
-	service "github.com/Five-Series/questions/app/game"
-	"github.com/Five-Series/questions/app/game/model"
-	"github.com/Five-Series/questions/exception"
-	"github.com/Five-Series/questions/httphandler"
-	"github.com/Five-Series/questions/input"
+	service "github.com/OalexDev/QuestionsAPPAPI/app/game"
+	"github.com/OalexDev/QuestionsAPPAPI/app/game/model"
+	"github.com/OalexDev/QuestionsAPPAPI/exception"
+	"github.com/OalexDev/QuestionsAPPAPI/httphandler"
+	"github.com/OalexDev/QuestionsAPPAPI/input"
 	"github.com/gin-gonic/gin"
 )
 

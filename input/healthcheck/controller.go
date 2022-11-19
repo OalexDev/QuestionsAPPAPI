@@ -3,9 +3,9 @@ package healthcheck
 import (
 	"net/http"
 
-	service "github.com/Five-Series/questions/app/healthcheck"
-	"github.com/Five-Series/questions/exception"
-	"github.com/Five-Series/questions/httphandler"
+	service "github.com/OalexDev/QuestionsAPPAPI/app/healthcheck"
+	"github.com/OalexDev/QuestionsAPPAPI/exception"
+	"github.com/OalexDev/QuestionsAPPAPI/httphandler"
 
 	"github.com/gin-gonic/gin"
 )

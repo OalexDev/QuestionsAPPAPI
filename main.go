@@ -4,12 +4,12 @@ import (
 	"context"
 	"database/sql"
 
-	"github.com/Five-Series/questions/factory/game"
-	"github.com/Five-Series/questions/factory/healthcheck"
-	"github.com/Five-Series/questions/factory/room"
-	"github.com/Five-Series/questions/factory/word"
-	"github.com/Five-Series/questions/infra/database"
-	"github.com/Five-Series/questions/infra/environment"
+	"github.com/OalexDev/QuestionsAPPAPI/factory/game"
+	"github.com/OalexDev/QuestionsAPPAPI/factory/healthcheck"
+	"github.com/OalexDev/QuestionsAPPAPI/factory/room"
+	"github.com/OalexDev/QuestionsAPPAPI/factory/word"
+	"github.com/OalexDev/QuestionsAPPAPI/infra/database"
+	"github.com/OalexDev/QuestionsAPPAPI/infra/environment"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"

@@ -3,9 +3,9 @@ package game
 import (
 	"strings"
 
-	"github.com/Five-Series/questions/app/game/model"
-	"github.com/Five-Series/questions/infra/environment"
-	outGame "github.com/Five-Series/questions/output/game"
+	"github.com/OalexDev/QuestionsAPPAPI/app/game/model"
+	"github.com/OalexDev/QuestionsAPPAPI/infra/environment"
+	outGame "github.com/OalexDev/QuestionsAPPAPI/output/game"
 	"github.com/aws/aws-sdk-go/aws/session"
 )
 

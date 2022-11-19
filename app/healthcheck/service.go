@@ -1,9 +1,9 @@
 package healthcheck
 
 import (
-	"github.com/Five-Series/questions/app/healthcheck/model"
-	"github.com/Five-Series/questions/infra/environment"
-	outHealthCheck "github.com/Five-Series/questions/output/healthcheck"
+	"github.com/OalexDev/QuestionsAPPAPI/app/healthcheck/model"
+	"github.com/OalexDev/QuestionsAPPAPI/infra/environment"
+	outHealthCheck "github.com/OalexDev/QuestionsAPPAPI/output/healthcheck"
 )
 
 type Service struct {

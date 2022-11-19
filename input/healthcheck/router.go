@@ -1,7 +1,7 @@
 package healthcheck
 
 import (
-	"github.com/Five-Series/questions/exception"
+	"github.com/OalexDev/QuestionsAPPAPI/exception"
 	"github.com/gin-gonic/gin"
 )
 

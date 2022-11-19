@@ -3,9 +3,9 @@ package room
 import (
 	"fmt"
 
-	"github.com/Five-Series/questions/app/room/model"
-	"github.com/Five-Series/questions/infra/environment"
-	outRoom "github.com/Five-Series/questions/output/room"
+	"github.com/OalexDev/QuestionsAPPAPI/app/room/model"
+	"github.com/OalexDev/QuestionsAPPAPI/infra/environment"
+	outRoom "github.com/OalexDev/QuestionsAPPAPI/output/room"
 	"github.com/aws/aws-sdk-go/aws/session"
 )
 

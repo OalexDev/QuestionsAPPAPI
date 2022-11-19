@@ -3,8 +3,8 @@ package healthcheck
 import (
 	"database/sql"
 
-	"github.com/Five-Series/questions/app/healthcheck/model"
-	"github.com/Five-Series/questions/infra/environment"
+	"github.com/OalexDev/QuestionsAPPAPI/app/healthcheck/model"
+	"github.com/OalexDev/QuestionsAPPAPI/infra/environment"
 	"github.com/gin-gonic/gin"
 )
 

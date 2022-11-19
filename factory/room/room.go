@@ -4,10 +4,10 @@ import (
 	"database/sql"
 	"log"
 
-	svcRoom "github.com/Five-Series/questions/app/room"
-	"github.com/Five-Series/questions/infra/environment"
-	inRoom "github.com/Five-Series/questions/input/room"
-	outRoom "github.com/Five-Series/questions/output/room"
+	svcRoom "github.com/OalexDev/QuestionsAPPAPI/app/room"
+	"github.com/OalexDev/QuestionsAPPAPI/infra/environment"
+	inRoom "github.com/OalexDev/QuestionsAPPAPI/input/room"
+	outRoom "github.com/OalexDev/QuestionsAPPAPI/output/room"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/gin-gonic/gin"
 )
